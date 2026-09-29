@@ -1,0 +1,274 @@
+@import "tailwindcss";
+
+/* ───────────── Custom display fonts (from /public/fonts) ───────────── */
+@font-face {
+  font-family: "Rusty Attack";
+  src: url("/fonts/RUSTY ATTACK DEMO Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Edo";
+  src: url("/fonts/edo.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Storm Gust";
+  src: url("/fonts/Storm Gust.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nelyx Brush";
+  src: url("/fonts/NelyxBrush-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sketch Brush";
+  src: url("/fonts/Sketch Brush.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Edu QLD Hand is a variable font: one file covers weights 400–700 */
+@font-face {
+  font-family: "Edu QLD Hand";
+  src: url("/fonts/EduQLDHand-VariableFont_wght.ttf") format("truetype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Outfit is a variable font: one file covers weights 100–900 */
+@font-face {
+  font-family: "Outfit";
+  src: url("/fonts/Outfit-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ───────────── Design tokens (Tailwind v4 reads these from CSS) ───────────── */
+@theme inline {
+  --color-paper: #f0e7d4;
+  --color-paper-2: #e3d6bb;
+  --color-ink: #14110e;
+  --color-charcoal: #1d1915;
+  --color-vermilion: #d8432a;
+  --color-sticky: #f3e0a6;
+  --color-sun: #e9a23b;
+
+  --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-brush: var(--font-marker), "Comic Sans MS", cursive;
+  --font-hand: var(--font-caveat), "Comic Sans MS", cursive;
+  --font-rusty: "Rusty Attack", var(--font-marker), "Comic Sans MS", cursive;
+  --font-edo: "Edo", var(--font-marker), "Comic Sans MS", cursive;
+  --font-storm: "Storm Gust", var(--font-marker), "Comic Sans MS", cursive;
+  --font-nelyx: "Nelyx Brush", var(--font-marker), "Comic Sans MS", cursive;
+  --font-sketch: "Sketch Brush", var(--font-marker), "Comic Sans MS", cursive;
+  --font-edu-qld: "Edu QLD Hand", var(--font-caveat), "Comic Sans MS", cursive;
+  --font-outfit: "Outfit", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+  /* Film-grain / paper-fibre noise, generated — no texture image required */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36  0 0 0 0 .28  0 0 0 0 .18  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+html {
+  background: var(--color-ink);
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-vermilion);
+  color: var(--color-paper);
+}
+
+/* ───────────── Paper surfaces ───────────── */
+.paper {
+  background-color: var(--color-paper);
+  background-image:
+    var(--grain),
+    radial-gradient(ellipse at 18% 8%, rgb(255 255 255 / 0.4), transparent 55%),
+    radial-gradient(ellipse at 92% 92%, rgb(150 115 70 / 0.2), transparent 60%);
+}
+
+.paper-dark {
+  background-color: var(--color-charcoal);
+  background-image:
+    var(--grain),
+    radial-gradient(ellipse at 20% 0%, rgb(255 255 255 / 0.05), transparent 60%);
+}
+
+/* Subtle whole-page film grain (fixed overlay) */
+.site-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  background-image: var(--grain);
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+}
+
+/* ───────────── Typography helpers ───────────── */
+.label {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* Dry-brush edge: SVG displacement filter defined once in the root layout */
+.brush-rough {
+  filter: url(#rough-brush);
+}
+
+/* ───────────── Lenis (smooth scroll) ───────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* Hide scrollbars on horizontal strips but keep them scrollable */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ───────────── Motion safety ───────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ───────────── Hero-specific ───────────── */
+.hero-rusty {
+  font-family: var(--font-rusty);
+}
+
+/* Ink-splatter layer along the torn edge */
+.hero-ink-edge::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  z-index: 15;
+  pointer-events: none;
+  background-image:
+    radial-gradient(
+      ellipse 6px 3px at 50% 50%,
+      rgba(20, 17, 14, 0.7),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 4px 8px at 48% 52%,
+      rgba(20, 17, 14, 0.5),
+      transparent
+    ),
+    radial-gradient(circle 2px at 46% 54%, rgba(20, 17, 14, 0.6), transparent);
+  background-size:
+    18px 22px,
+    14px 16px,
+    10px 12px;
+  background-repeat: repeat;
+  mask-image: linear-gradient(
+    to right,
+    transparent 35%,
+    black 42%,
+    black 48%,
+    transparent 55%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 35%,
+    black 42%,
+    black 48%,
+    transparent 55%
+  );
+  opacity: 0.15;
+  mix-blend-mode: multiply;
+}
+
+/* Paper stain spots */
+.paper-stains {
+  background-image:
+    radial-gradient(
+      ellipse at 12% 88%,
+      rgb(180 150 100 / 0.12),
+      transparent 30%
+    ),
+    radial-gradient(ellipse at 72% 8%, rgb(170 140 80 / 0.08), transparent 25%),
+    radial-gradient(ellipse at 35% 65%, rgb(140 110 60 / 0.06), transparent 20%);
+}
+
+/* Vertical text annotation */
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.art-button {
+  position: relative;
+
+  display: block;
+
+  width: var(--mobile-width);
+  height: var(--mobile-height);
+
+  padding: 0;
+  border: 0;
+
+  overflow: hidden;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+  .art-button {
+    width: var(--desktop-width);
+    height: var(--desktop-height);
+  }
+}
