@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Image } from "@imagekit/next";
 import { useEffect, useState } from "react";
 
 type FooterArtist = {
@@ -9,10 +9,7 @@ type FooterArtist = {
 
 // Add / remove artists here. Images go in /public/artists/
 const ARTISTS: readonly FooterArtist[] = [
-  { image: "/images/artist_img_1.png" },
-  { image: "/images/artist_img_2.jpg" },
-  { image: "/images/artist_img_3.jpg" },
-  { image: "/images/artist_img_4.jpg" },
+  { image: "/artist/artist_img_1.png" },
 ];
 
 export function FooterArtistReel({ className = "" }: { className?: string }) {
@@ -56,7 +53,7 @@ export function FooterArtistReel({ className = "" }: { className?: string }) {
 
             {/* Reel frame on top */}
             <Image
-              src="/images/reel.png"
+              src="reel.png"
               alt=""
               fill
               sizes="192px"
@@ -67,7 +64,7 @@ export function FooterArtistReel({ className = "" }: { className?: string }) {
             {/* Tape + artist name */}
             <div className="absolute bottom-[6%] left-10 w-[60%] -translate-x-1/2">
               <Image
-                src="/images/tape_2.png"
+                src="tape_2.png"
                 alt=""
                 width={500}
                 height={200}

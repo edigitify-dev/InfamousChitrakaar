@@ -4,13 +4,14 @@ import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { ArtButton } from "../ui/ArtButton";
+import { Image } from "@imagekit/next";
 
 /* ---------- EDIT YOUR ARTIST DETAILS HERE ---------- */
 const ARTISTS = [
   {
     name: "Shravya",
     eyebrow: "Meet the artist",
-    image: "/images/artist_img_1.png",
+    image: "/artist/artist_img_1.png",
     bio: "Aanya creates dreamy, nature-inspired illustrations that capture quiet moments and everyday magic. Her work is rooted in nostalgia, slow living and a deep love for colour.",
     stats: [
       { icon: "bag", value: "320+", label: "items sold" },
@@ -18,45 +19,6 @@ const ARTISTS = [
       { icon: "star", value: "4.9", label: "artist rating" },
     ],
     aboutHref: "/artists/aanya-mehta",
-  },
-
-  {
-    name: "Aarav",
-    eyebrow: "Meet the artist",
-    image: "/images/artist_img_2.jpg",
-    bio: "Aarav's work blends bold colours, playful forms and everyday observations into artwork that feels expressive, warm and full of personality.",
-    stats: [
-      { icon: "bag", value: "185+", label: "items sold" },
-      { icon: "heart", value: "860", label: "happy customers" },
-      { icon: "star", value: "4.8", label: "artist rating" },
-    ],
-    aboutHref: "/artists/aarav-sharma",
-  },
-
-  {
-    name: "Meera",
-    eyebrow: "Meet the artist",
-    image: "/images/artist_img_3.jpg",
-    bio: "Meera creates colourful contemporary illustrations inspired by nature, Indian streets and the little details that make ordinary moments memorable.",
-    stats: [
-      { icon: "bag", value: "275+", label: "items sold" },
-      { icon: "heart", value: "1.1K", label: "happy customers" },
-      { icon: "star", value: "4.9", label: "artist rating" },
-    ],
-    aboutHref: "/artists/meera-kapoor",
-  },
-
-  {
-    name: "Riya",
-    eyebrow: "Meet the artist",
-    image: "/images/artist_img_4.jpg",
-    bio: "Riya's illustrations explore colour, emotion and storytelling through a playful visual language inspired by everyday life and childhood memories.",
-    stats: [
-      { icon: "bag", value: "410+", label: "items sold" },
-      { icon: "heart", value: "1.5K", label: "happy customers" },
-      { icon: "star", value: "5.0", label: "artist rating" },
-    ],
-    aboutHref: "/artists/riya-verma",
   },
 ];
 
@@ -183,15 +145,19 @@ export function ArtistPopup() {
             <div className="relative mx-auto w-full max-w-[330px]">
               <div className="relative aspect-[0.72/1] w-full">
                 {/* tape */}
-                <img
-                  src="/images/tape_1.png"
+                <Image
+                  src="tape_1.png"
+                  width={500}
+                  height={200}
                   className="relative z-20 w-25 -rotate-[30deg] -left-5 top-5"
                   alt=""
                 />
                 {/* Polaroid */}
-                <img
-                  src="/images/pollaroid.png"
+                <Image
+                  src="pollaroid.png"
                   alt=""
+                  width={826}
+                  height={1080}
                   aria-hidden="true"
                   className="absolute inset-0 h-full w-full object-fill"
                 />
@@ -208,8 +174,10 @@ export function ArtistPopup() {
                     transform: "rotate(-3deg)",
                   }}
                 >
-                  <img
+                  <Image
                     src={artist.image}
+                    width={735}
+                    height={860}
                     alt={artist.name}
                     className="h-full w-full object-cover"
                   />

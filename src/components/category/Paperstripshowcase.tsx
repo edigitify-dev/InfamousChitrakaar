@@ -1,8 +1,10 @@
-const PAPER_TEAR = "/images/brown_paper_tear_7.png";
-const SCRIBBLE_ARROW = "/images/scribble_arrow.png";
-const HEARTS = "/images/hearts.png";
-const BUTTERFLY = "/images/pen_scribble_butterfly.png";
-const ARROW = "/images/scribble_arrow.png";
+import { Image } from "@imagekit/next";
+
+const PAPER_TEAR = "https://ik.imagekit.io/f4ajtfqtl/brown_paper_tear_7.png";
+const SCRIBBLE_ARROW = "scribble_arrow.png";
+const HEARTS = "hearts.png";
+const BUTTERFLY = "pen_scribble_butterfly.png";
+const ARROW = "scribble_arrow.png";
 
 type Item = {
   label: string;
@@ -26,44 +28,44 @@ type Item = {
 const ITEMS: Item[] = [
   {
     label: "Tote Bags",
-    image: "/images/category_1.png",
+    image: "/category/category_1.png",
     size: 0.85,
     y: 3,
   },
   {
     label: "T-Shirts",
-    image: "/images/category_2.png",
+    image: "/category/category_2.png",
     size: 0.78,
     y: 2,
     arrow: true,
   },
   {
     label: "Art Prints",
-    image: "/images/category_3.png",
+    image: "/category/category_3.png",
     size: 0.76,
     y: 1,
   },
   {
     label: "Postcards",
-    image: "/images/category_4.png",
+    image: "/category/category_4.png",
     size: 0.72,
     y: 2,
   },
   {
     label: "Notebooks",
-    image: "/images/category_5.png",
+    image: "/category/category_5.png",
     size: 0.78,
     y: 0,
   },
   {
     label: "Stickers",
-    image: "/images/category_6.png",
+    image: "/category/category_6.png",
     size: 0.72,
     y: 3,
   },
   {
     label: "Playing Cards",
-    image: "/images/category_7.png",
+    image: "/category/category_7.png",
     size: 0.72,
     y: 2,
   },
@@ -148,10 +150,12 @@ export default function PaperStripShowcase({
 
         <div className="pointer-events-none absolute inset-0 z-0">
           {DOODLES.map((d, index) => (
-            <img
+            <Image
               key={index}
               src={d.src}
               alt=""
+              width={1080}
+              height={1080}
               aria-hidden="true"
               draggable={false}
               className="absolute select-none opacity-80"
@@ -247,10 +251,12 @@ export default function PaperStripShowcase({
                         { "--tilt": `${hoverTilt}deg` } as React.CSSProperties
                       }
                     >
-                      <img
+                      <Image
                         src={item.image}
                         alt={item.label}
                         draggable={false}
+                        width={500}
+                        height={650}
                         className="
                           block
                           h-full
@@ -335,8 +341,10 @@ export default function PaperStripShowcase({
                   </span>
 
                   {item.arrow && (
-                    <img
+                    <Image
                       src={SCRIBBLE_ARROW}
+                      width={500}
+                      height={200}
                       alt=""
                       aria-hidden="true"
                       draggable={false}

@@ -1,5 +1,6 @@
 "use client";
 
+import { Image } from "@imagekit/next";
 import {
   useCallback,
   useEffect,
@@ -47,7 +48,7 @@ type Wall = { title: string; image?: string; items: Product[] };
 const gallery = (slug: string, count = 4) =>
   Array.from(
     { length: count },
-    (_, i) => `/images/studio/${slug}_${i + 1}.png`,
+    (_, i) => `https://ik.imagekit.io/f4ajtfqtl/studio/${slug}_${i + 1}.png`,
   );
 
 const FLORAL_BLOOM_DIARY: ProductInfo = {
@@ -620,7 +621,7 @@ const TYPOGRAPHY_TSHIRT: ProductInfo = {
 const WALLS: Wall[] = [
   {
     title: "",
-    image: "/images/wall_1.png",
+    image: "https://ik.imagekit.io/f4ajtfqtl/studio/walls/wall_1.png",
     items: [
       { ...ABSTRACT_SUNSET_PAINTING, pos: { left: -10, top: 20, width: 18 } },
       { ...BOTANICAL_DREAM_PAINTING, pos: { left: 12, top: 20, width: 18 } },
@@ -636,7 +637,7 @@ const WALLS: Wall[] = [
   },
   {
     title: "",
-    image: "/images/wall_2.png",
+    image: "https://ik.imagekit.io/f4ajtfqtl/studio/walls/wall_2.png",
     items: [
       { ...ABSTRACT_SUNSET_PAINTING, pos: { left: 15, top: 22, width: 14 } },
       { ...BOTANICAL_DREAM_PAINTING, pos: { left: 43, top: 22, width: 14 } },
@@ -648,7 +649,7 @@ const WALLS: Wall[] = [
   },
   {
     title: "",
-    image: "/images/wall_3.png",
+    image: "https://ik.imagekit.io/f4ajtfqtl/studio/walls/wall_3.png",
     items: [
       { ...TOTE_BAG_1 },
       { ...TOTE_BAG_2, pos: { left: 36, top: 12, width: 28 } },
@@ -657,7 +658,7 @@ const WALLS: Wall[] = [
   },
   {
     title: "",
-    image: "/images/wall_4.png",
+    image: "https://ik.imagekit.io/f4ajtfqtl/studio/walls/wall_4.png",
     items: [
       { ...ABSTRACT_ART_TSHIRT },
       { ...BOTANICAL_TSHIRT },
@@ -867,8 +868,10 @@ function ProductModal({
           <div className="flex flex-col gap-3 bg-[#efe7da] p-4 sm:p-6 md:h-full md:min-h-0 md:overflow-hidden">
             <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-xl bg-[#e6dccb] md:aspect-auto md:min-h-0 md:flex-1">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 key={imgIdx}
+                width={1100}
+                height={1430}
                 src={product.images[imgIdx]}
                 alt={`${product.name} - view ${imgIdx + 1}`}
                 className="h-full w-full object-contain p-4"
@@ -914,9 +917,11 @@ function ProductModal({
                     }`}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src={src}
                       alt=""
+                      width={1100}
+                      height={1430}
                       className="h-full w-full object-contain p-1"
                       draggable={false}
                     />
@@ -1226,8 +1231,10 @@ export default function RoomShowcase({ walls = WALLS }: { walls?: Wall[] }) {
                       >
                         {/* soft shadow cast onto the wall (light from top-left) */}
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
+                        <Image
                           src={p.images[0]}
+                          width={500}
+                          height={650}
                           alt=""
                           aria-hidden
                           draggable={false}
@@ -1238,15 +1245,19 @@ export default function RoomShowcase({ walls = WALLS }: { walls?: Wall[] }) {
                         />
                         {/* product image, floating slightly off the wall */}
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
+                        <Image
                           src={p.images[0]}
+                          width={500}
+                          height={650}
                           alt={p.name}
                           draggable={false}
-                          className="absolute inset-0 h-full w-full select-none object-contain transition-[transform,filter] duration-300 ease-out [transform:translateZ(var(--t))] group-hover:[transform:translateZ(var(--t))_scale(1.08)] group-focus-visible:[transform:translateZ(var(--t))_scale(1.08)]"
+                          className="absolute inset-0 h-full w-full select-none object-contain [transform:translateZ(var(--t))] group-hover:[transform:translateZ(var(--t))_scale(1.08)] group-focus-visible:[transform:translateZ(var(--t))_scale(1.08)]"
                           style={{
-                            filter: on
-                              ? "drop-shadow(0 2px 3px rgba(0,0,0,.35))"
-                              : "brightness(.72)",
+                            // same filter functions in both states so the browser can interpolate
+                            filter: `drop-shadow(0 2px 3px rgba(0,0,0,.35)) brightness(${on ? 1 : 0.72})`,
+                            // hover scale stays quick, the dim follows the room's turn
+                            transition:
+                              "transform 300ms ease-out, filter var(--dur) var(--ease)",
                           }}
                         />
                       </button>
@@ -1255,7 +1266,11 @@ export default function RoomShowcase({ walls = WALLS }: { walls?: Wall[] }) {
 
                   {/* walls turned away from the camera get darker */}
                   <div
-                    className={`pointer-events-none absolute inset-0 bg-[#0b0704] transition-opacity duration-[var(--dur)] ${on ? "opacity-0" : "opacity-40"}`}
+                    className="pointer-events-none absolute inset-0 bg-[#0b0704]"
+                    style={{
+                      opacity: on ? 0 : 0.4,
+                      transition: "opacity var(--dur) var(--ease)",
+                    }}
                   />
                 </section>
               );

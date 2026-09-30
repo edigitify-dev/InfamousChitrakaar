@@ -2,15 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { Image } from "@imagekit/next";
 
 /** Designed fallbacks shown until a real photo is dropped into /public/images. */
 export const FALLBACKS = {
   studio:
     "radial-gradient(circle at 72% 28%, rgb(255 196 120 / .55), transparent 38%), radial-gradient(circle at 18% 62%, rgb(255 150 80 / .35), transparent 34%), radial-gradient(circle at 50% 100%, rgb(120 60 40 / .5), transparent 50%), linear-gradient(160deg, #54402f, #1d1611)",
-  desk:
-    "radial-gradient(circle at 62% 30%, rgb(255 200 130 / .5), transparent 34%), radial-gradient(circle at 20% 80%, rgb(90 110 70 / .5), transparent 40%), linear-gradient(150deg, #4b3b2c, #17120e)",
-  wall:
-    "radial-gradient(circle at 30% 30%, rgb(255 190 110 / .45), transparent 40%), linear-gradient(140deg, #3b2f25, #15110d)",
+  desk: "radial-gradient(circle at 62% 30%, rgb(255 200 130 / .5), transparent 34%), radial-gradient(circle at 20% 80%, rgb(90 110 70 / .5), transparent 40%), linear-gradient(150deg, #4b3b2c, #17120e)",
+  wall: "radial-gradient(circle at 30% 30%, rgb(255 190 110 / .45), transparent 40%), linear-gradient(140deg, #3b2f25, #15110d)",
   table:
     "radial-gradient(circle at 80% 20%, rgb(255 180 100 / .35), transparent 40%), radial-gradient(circle at 10% 70%, rgb(70 100 60 / .45), transparent 42%), linear-gradient(170deg, #2c221a, #100c09)",
   cards:
@@ -58,12 +57,16 @@ export function ArtImage({
   }, [src]);
 
   return (
-    <div role="img" aria-label={alt} className={cn("relative overflow-hidden", className)}>
+    <div
+      role="img"
+      aria-label={alt}
+      className={cn("relative overflow-hidden", className)}
+    >
       <div className="absolute inset-0" style={{ background: fallback }} />
       {placeholder && <div className="absolute inset-0">{placeholder}</div>}
       {src && !failed && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <Image
           ref={imgRef}
           src={src}
           alt=""

@@ -9,6 +9,7 @@ import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
 import { Loader } from "@/components/ui/Loader";
+import ImageKitProvider from "@/components/ImageKitProvider";
 
 /*
  * Fonts. The plan names Kabel + Glacial Indifference; those aren't on Google Fonts,
@@ -99,7 +100,9 @@ export default function RootLayout({
           </defs>
         </svg>
         <Loader />
-        <SmoothScroll>{children}</SmoothScroll>
+        <ImageKitProvider>
+          <SmoothScroll>{children}</SmoothScroll>
+        </ImageKitProvider>
         <div className="site-grain" aria-hidden="true" />
       </body>
     </html>

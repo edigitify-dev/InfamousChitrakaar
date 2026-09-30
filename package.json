@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@imagekit/next": "^2.1.6",
     "@react-three/drei": "^10.7.8",
     "@react-three/fiber": "^9.8.0",
     "clsx": "^2.1.1",

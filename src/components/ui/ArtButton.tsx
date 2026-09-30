@@ -1,3 +1,4 @@
+import { Image } from "@imagekit/next";
 import type { ButtonHTMLAttributes, CSSProperties } from "react";
 
 interface ArtButtonProps extends Omit<
@@ -44,10 +45,12 @@ export function ArtButton({
       className={`art-button ${className}`}
     >
       {/* Background artwork */}
-      <img
-        src="/images/button_bg.png"
+      <Image
+        src="button_bg.png"
         alt=""
         aria-hidden="true"
+        width={500}
+        height={100}
         className="pointer-events-none absolute inset-0 z-0 h-full w-full object-contain"
       />
 

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useGSAP } from "@/hooks/useGSAP";
 import { ArtButton } from "../ui/ArtButton";
 import { ArtistPopup } from "./ArtistPopup";
+import { Image } from "@imagekit/next";
 
 interface HeroSectionProps {
   content: {
@@ -17,22 +18,6 @@ interface HeroSectionProps {
 const HAND = {
   fontFamily: 'var(--font-hand, "Caveat", "Segoe Print", cursive)',
 };
-
-const STRIP_CLIP =
-  "polygon(0% 14%,4% 8%,9% 13%,15% 6%,21% 12%,28% 5%,35% 11%,42% 4%,50% 10%,57% 5%,64% 12%,71% 6%,78% 11%,85% 4%,92% 10%,97% 6%,100% 11%,100% 100%,0% 100%)";
-
-const NOTE_CLIP =
-  "polygon(2% 3%,30% 0%,60% 2%,100% 0%,98% 35%,100% 70%,97% 100%,60% 98%,30% 100%,0% 97%,2% 65%,0% 30%)";
-
-const CATEGORIES = [
-  { label: "Tote Bags", src: "/images/categories/tote-bag.png" },
-  { label: "T-Shirts", src: "/images/categories/t-shirt.png" },
-  { label: "Art Prints", src: "/images/categories/art-print.png" },
-  { label: "Postcards", src: "/images/categories/postcards.png" },
-  { label: "Notebooks", src: "/images/categories/notebook.png" },
-  { label: "Stickers", src: "/images/categories/stickers.png" },
-  { label: "Playing Cards", src: "/images/categories/playing-cards.png" },
-];
 
 export function HeroSection({ content }: HeroSectionProps) {
   const ref = useRef<HTMLElement>(null);
@@ -84,17 +69,31 @@ export function HeroSection({ content }: HeroSectionProps) {
       className="relative isolate h-[100vh] min-h-[650px] max-h-[900px] overflow-hidden bg-paper"
     >
       {/* FULL-BLEED BACKGROUND IMAGE */}
-      <img
+      <Image
         data-hero="image"
-        src="/images/temp_bg.png"
+        src="temp_bg.png"
         alt="The Infamous Chitrakar studio"
         className="absolute inset-0 -z-10 h-full w-full object-cover object-center"
+        width={1774}
+        height={887}
       />
       <div className="absolute top-0 -left-2 w-[70%] h-25">
-        <img src="/images/brown_paper_tear_5.png" alt="" className="w-full" />
+        <Image
+          src="brown_paper_tear_5.png"
+          alt=""
+          className="w-full"
+          width={1200}
+          height={900}
+        />
       </div>
       <div className="absolute top-0 -right-2 w-[25%] h-25">
-        <img src="/images/brown_paper_tear_6.png" alt="" className="w-full" />
+        <Image
+          src="brown_paper_tear_6.png"
+          alt=""
+          className="w-full"
+          width={500}
+          height={150}
+        />
       </div>
 
       {/* LEFT — TORN PAPER CARD */}
@@ -104,22 +103,28 @@ export function HeroSection({ content }: HeroSectionProps) {
         style={{ filter: "drop-shadow(0 10px 18px rgba(0,0,0,.35))" }}
       >
         <div className="relative px-8 pb-12 pt-14 sm:px-10 lg:px-12 lg:pb-14 lg:pt-16">
-          <img
-            src="/images/crown.png"
+          <Image
+            src="crown.png"
             alt=""
             aria-hidden="true"
+            width={500}
+            height={500}
             className="absolute right-8 top-16 h-17 w-17 -rotate-6 object-contain sm:right-10"
           />
-          <img
-            src="/images/or_star.png"
+          <Image
+            src="or_star.png"
             alt=""
             aria-hidden="true"
+            width={1080}
+            height={1080}
             className="absolute left-60 top-16 h-7 w-7 -rotate-6 object-contain sm:right-10"
           />
-          <img
-            src="/images/or_star.png"
+          <Image
+            src="or_star.png"
             alt=""
             aria-hidden="true"
+            width={1080}
+            height={1080}
             className="absolute  bottom-50 h-10 w-10 -rotate-6 object-contain sm:right-10"
           />
 
@@ -174,10 +179,12 @@ export function HeroSection({ content }: HeroSectionProps) {
         style={{ filter: "drop-shadow(0 6px 10px rgba(0,0,0,.3))" }}
       >
         {/* Paper background behind the note */}
-        <img
-          src="/images/brown_paper_tear_3.png"
+        <Image
+          src="brown_paper_tear_3.png"
           alt=""
           aria-hidden="true"
+          width={1080}
+          height={1080}
           className="absolute inset-0 h-full w-full object-fill"
         />
 

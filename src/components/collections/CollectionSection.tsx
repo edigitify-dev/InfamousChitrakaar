@@ -1,18 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { Playfair_Display, Space_Mono } from "next/font/google";
+import { Image } from "@imagekit/next";
 
 const serif = Playfair_Display({ subsets: ["latin"], weight: ["400", "500"] });
 const mono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"] });
 
 /* ---------- 👇 PUT YOUR IMAGE PATHS HERE ---------- */
 const ASSETS = {
-  paper: "/images/brown_paper_tear_9.png",
-  crown: "/images/crown.png",
-  tape: "/images/tape_2.png",
-  plantLeft: "/images/plant-left.png",
-  plantBottom: "/images/plant-bottom.png",
-  plantRight: "/images/plant-right.png",
+  paper: "brown_paper_tear_9.png",
+  crown: "crown.png",
+  tape: "tape_2.png",
+  plantLeft: "plant-left.png",
+  plantBottom: "plant-bottom.png",
+  plantRight: "plant-right.png",
 };
 
 const COLLECTIONS = [
@@ -42,8 +43,10 @@ export default function Collections() {
   return (
     <section className="relative w-full overflow-hidden z-10">
       {/* Paper background (torn edges are baked into the PNG) */}
-      <img
+      <Image
         src={ASSETS.paper}
+        width={2500}
+        height={600}
         alt=""
         aria-hidden
         className="pointer-events-none absolute inset-0 h-full w-full select-none object-fill"
@@ -52,21 +55,27 @@ export default function Collections() {
       {/* Content */}
       <div className="relative px-6 pb-30 pt-38 sm:px-10 lg:px-14">
         {/* Plants */}
-        <img
+        <Image
           src={ASSETS.plantLeft}
+          width={500}
+          height={500}
           alt=""
           aria-hidden
           className="pointer-events-none absolute -left-5 top-10 hidden h-40 w-auto select-none sm:block"
         />
-        <img
+        <Image
           src={ASSETS.plantBottom}
+          width={500}
+          height={500}
           alt=""
           aria-hidden
           className="pointer-events-none absolute bottom-10 rotate-45 left-[14%] hidden h-24 w-auto select-none lg:block"
         />
-        <img
+        <Image
           src={ASSETS.plantRight}
           alt=""
+          width={500}
+          height={500}
           aria-hidden
           className="pointer-events-none absolute -right-2 bottom-10 hidden h-42 w-auto select-none sm:block"
         />
@@ -114,8 +123,10 @@ export default function Collections() {
             </p>
 
             {/* Crown doodle */}
-            <img
+            <Image
               src={ASSETS.crown}
+              width={500}
+              height={500}
               alt=""
               aria-hidden
               className="pointer-events-none absolute top-0 right-16 hidden h-12 w-auto select-none lg:block"
@@ -130,16 +141,20 @@ export default function Collections() {
                   href={c.href}
                   className="group relative block h-[20rem] overflow-hidden rounded-md shadow-[0_2px_10px_rgba(0,0,0,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f26b3a]"
                 >
-                  <img
+                  <Image
                     src={c.img}
+                    width={500}
+                    height={650}
                     alt={`${c.label} collection`}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
 
                   {/* Tape label */}
                   <span className="absolute bottom-0 left-0 flex h-14 w-[78%] items-center px-4">
-                    <img
+                    <Image
                       src={ASSETS.tape}
+                      width={500}
+                      height={200}
                       alt=""
                       aria-hidden
                       className="pointer-events-none absolute inset-0 h-full w-full select-none object-fill"

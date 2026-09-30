@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Image } from "@imagekit/next";
 import Link from "next/link";
 import { useState } from "react";
 import { IBM_Plex_Mono, Inter, Newsreader } from "next/font/google";
@@ -40,7 +40,7 @@ const DEFAULT_PRODUCTS: Product[] = [
     name: "The Great Wave",
     category: "Art Print",
     price: 799,
-    image: "/images/product_1.png",
+    image: "/product/product_1.png",
     tape: "left",
   },
   {
@@ -48,21 +48,21 @@ const DEFAULT_PRODUCTS: Product[] = [
     name: "Faces Tote",
     category: "Tote Bag",
     price: 899,
-    image: "/images/product_2.png",
+    image: "/product/product_2.png",
   },
   {
     id: "chitrakar-tee",
     name: "Chitrakar Tee",
     category: "T-Shirt",
     price: 1299,
-    image: "/images/product_3.png",
+    image: "/product/product_3.png",
   },
   {
     id: "skyline-postcards",
     name: "Skyline Postcard Set",
     category: "Postcards (Set of 5)",
     price: 299,
-    image: "/images/category_7.png",
+    image: "/category/category_7.png",
     tape: "right",
   },
 ];
@@ -207,8 +207,10 @@ export default function FeaturedProducts({
                 className="relative drop-shadow-[0_10px_14px_rgba(0,0,0,0.4)]"
               >
                 {product.tape && (
-                  <img
-                    src="/images/tape_1.png"
+                  <Image
+                    src="tape_1.png"
+                    width={500}
+                    height={200}
                     className={`pointer-events-none absolute z-30 h-[34px] w-[88px] ${
                       product.tape === "left"
                         ? "-left-5 top-1 -rotate-[25deg]"
